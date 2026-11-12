@@ -324,47 +324,69 @@ function ContentSummaryRow({ state, facility, showMessages, retrySummary, retryF
     })}</div>
   </section>;
 }
-function PublicationDonut({ metric, index }) {
-  const [hover, setHover] = useState(false);
+function PublicationDonut({ metric }) {
+  const [showTooltip, setShowTooltip] = useState(false);
   const rate = percent(metric.value, metric.total);
-  const radius = 38;
-  const circumference = 2 * Math.PI * radius;
+  const rounded = Math.round(rate);
+  const progress = `${rate} ${100 - rate}`;
+
   return <div className={styles.publicationMetric}>
-    <svg viewBox="0 0 110 110" className={styles.publicationSvg} role="img" tabIndex={0}
-      aria-label={`${metric.title}: ${fmt(metric.value)} of ${fmt(metric.total)} ${metric.noun}, ${rate.toFixed(0)} percent`}
-      onFocus={() => setHover(true)} onBlur={() => setHover(false)} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-      <circle cx="55" cy="55" r={radius} className={styles.donutTrack} />
-      <circle cx="55" cy="55" r={radius} className={styles[`donutTone${index}`]}
-        strokeDasharray={`${(rate / 100) * circumference} ${circumference}`} transform="rotate(-90 55 55)" />
-      <text className={styles.donutValue} x="55" y="61" textAnchor="middle">{rate.toFixed(0)}%</text>
+    <svg viewBox="0 0 180 180" className={styles.publicationSvg} role="img" tabIndex={0}
+      aria-label={`${metric.title}: ${fmt(metric.value)} of ${fmt(metric.total)} ${metric.noun}, ${rounded} percent`}
+      onFocus={() => setShowTooltip(true)} onBlur={() => setShowTooltip(false)}
+      onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}>
+      <circle cx="90" cy="90" r="77" className={styles.donutTrack} />
+      {rate > 0 && <circle cx="90" cy="90" r="77" pathLength="100"
+        className={styles.donutProgress} strokeDasharray={progress}
+        style={{ "--donut-fill": progress }} transform="rotate(-90 90 90)" />}
+      <text className={styles.donutValue} x="90" y="91" textAnchor="middle">
+        <tspan className={styles.donutNumber}>{rounded}</tspan><tspan className={styles.donutPercent}>%</tspan>
+      </text>
+      <text className={styles.donutInnerLabel} x="90" y="115" textAnchor="middle">{metric.noun}</text>
     </svg>
-    {hover && <span className={styles.donutTooltip} role="status">{fmt(metric.value)} of {fmt(metric.total)} {metric.noun}</span>}
+    {showTooltip && <span className={styles.donutTooltip} role="status">
+      {fmt(metric.value)} of {fmt(metric.total)} {metric.plural}
+    </span>}
   </div>;
 }
+
 function PublicationProgressCard({ metric, index, state, retry, restricted }) {
-  // Editors see the division count, but cannot navigate to division administration.
-  const action = restricted ? <span className={styles.subtlePill}>Overview</span> : <PillLink href={metric.href}>View</PillLink>;
+  // Editors can inspect division totals but cannot navigate to division administration.
+  const action = restricted
+    ? <span className={styles.subtlePill}>Overview</span>
+    : <PillLink href={metric.href}>View</PillLink>;
   const pendingText = metric.kind === "divisions"
     ? `${fmt(metric.pending)} ${metric.pending === 1 ? "division is" : "divisions are"} inactive`
     : `${fmt(metric.pending)} ${metric.pending === 1 ? "item is" : "items are"} still in draft`;
   const completeText = metric.kind === "divisions" ? "All divisions active" : "All published";
-  return <Panel title={metric.title} action={action} className={styles.publishingCard}>
-    <Status state={state} retry={retry}>
+
+  return <Panel title={metric.title} action={action}
+    className={`${styles.publishingCard} ${styles[`publicationTone${index}`]}`}>
+    <Status state={state} retry={retry} size="tall">
       <div className={styles.publicationCardBody}>
-        <PublicationDonut metric={metric} index={index} />
-        <div className={styles.publicationDetails}>
-          <p className={styles.publicationCount}><strong>{fmt(metric.value)}</strong> of <strong>{fmt(metric.total)}</strong> {metric.noun}</p>
-          <div className={styles.publicationChips}>
-            <span className={styles.publishedChip}>{fmt(metric.value)} {metric.noun}</span>
-            <span className={styles.pendingChip}>{fmt(metric.pending)} {metric.pendingLabel}</span>
-          </div>
-          <p className={styles.publicationNote}>{metric.total === 0 ? `No ${metric.plural} recorded yet` : metric.pending > 0 ? pendingText : <><CheckCircle2 size={13} aria-hidden="true" /> {completeText}</>}</p>
+        <PublicationDonut metric={metric} />
+        <p className={styles.publicationCount}>
+          <strong>{fmt(metric.value)}</strong> of <strong>{fmt(metric.total)}</strong> {metric.noun}
+        </p>
+        <div className={styles.publicationChips}>
+          <span className={styles.publishedChip}>{fmt(metric.value)} {metric.noun}</span>
+          <span className={styles.pendingChip}>{fmt(metric.pending)} {metric.pendingLabel}</span>
         </div>
+        <p className={styles.publicationNote}>
+          {metric.total === 0
+            ? `No ${metric.plural} recorded yet`
+            : metric.pending > 0
+              ? pendingText
+              : <><CheckCircle2 size={13} aria-hidden="true" /> {completeText}</>}
+        </p>
       </div>
-      <HiddenTable caption={`${metric.title} publishing progress`} headings={["State", "Count"]} rows={[[metric.noun, fmt(metric.value)], [metric.pendingLabel, fmt(metric.pending)], ["Total", fmt(metric.total)]]} />
+      <HiddenTable caption={`${metric.title} publishing progress`}
+        headings={["State", "Count"]}
+        rows={[[metric.noun, fmt(metric.value)], [metric.pendingLabel, fmt(metric.pending)], ["Total", fmt(metric.total)]]} />
     </Status>
   </Panel>;
 }
+
 function PublishingProgressSection({ state, retry, editor }) {
   return <section className={styles.publishingSection} aria-labelledby="publishing-progress-title">
     <h2 id="publishing-progress-title" className={styles.sectionTitle}>Publishing progress</h2>
@@ -376,6 +398,7 @@ function PublishingProgressSection({ state, retry, editor }) {
     </div>
   </section>;
 }
+
 function EnquiryRows({ state, retry }) {
   if (state.loading && !state.data) return <div className={styles.rowSkeleton} aria-busy="true">Loading latest enquiries…</div>;
   if (state.error && !state.data) return <WidgetError message={state.error} retry={retry} />;
@@ -515,16 +538,16 @@ export default function DashboardPage() {
       <VisitorsCard state={analytics} retry={loadAnalytics} />
       <TrafficTrendCard state={analytics} retry={loadAnalytics} />
       <TrafficSourcesCard state={analytics} retry={loadAnalytics} />
-      <ActivityCard state={summary} retry={loadSummary} />
-      <ContentSummaryRow state={summary} facility={facility} showMessages retrySummary={loadSummary} retryFacility={loadFacility} />
       <PublishingProgressSection state={summary} retry={loadSummary} />
+      <ActivityCard state={summary} retry={loadSummary} />
       <PageViewsCard state={analytics} retry={loadAnalytics} />
       <EnquiryRateCard state={summary} retry={loadSummary} />
       <LatestEnquiriesCard state={messages} retry={loadMessages} />
+      <ContentSummaryRow state={summary} facility={facility} showMessages retrySummary={loadSummary} retryFacility={loadFacility} />
     </div> : <div className={styles.dashboardGrid}>
+      <PublishingProgressSection state={summary} retry={loadSummary} editor />
       <ActivityCard state={summary} retry={loadSummary} />
       <ContentSummaryRow state={summary} facility={facility} retrySummary={loadSummary} retryFacility={loadFacility} />
-      <PublishingProgressSection state={summary} retry={loadSummary} editor />
     </div>}
   </div>;
 }

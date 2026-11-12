@@ -2,8 +2,9 @@
 .card { min-height: 72px; padding: 14px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; border: 0; outline: 1px solid transparent; border-radius: 18px; background: var(--card-background); box-shadow: var(--card-shadow); }
 .search { height: 40px; min-width: 180px; width: min(430px, 100%); display: flex; align-items: center; gap: 9px; padding: 0 12px; border: 1px solid var(--border); border-radius: 11px; background: var(--input-background); color: var(--text-muted); }
 .search:focus-within { border-color: var(--primary); box-shadow: 0 0 0 2px var(--accent-soft); }
-.search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--text-primary); font-size: var(--fs-base); font-weight: 400; }
-.search input::placeholder { color: var(--text-placeholder); }
+.search > svg { flex-shrink: 0; }
+.search input { flex: 1; width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--text-primary); font-size: var(--fs-base); font-weight: 400; text-overflow: ellipsis; white-space: nowrap; }
+.search input::placeholder { color: var(--text-placeholder); opacity: 1; text-overflow: ellipsis; }
 .clearSearch { flex: 0 0 23px; width: 23px; height: 23px; display: grid; place-items: center; border: 0; border-radius: 6px; background: var(--surface-secondary); color: var(--text-muted); }
 .filters, .refresh { display: inline-flex; align-items: center; justify-content: center; gap: 7px; height: 40px; padding: 0 12px; border: 1px solid var(--border); border-radius: 11px; background: var(--surface-card); color: var(--text-secondary); font-size: var(--fs-sm); font-weight: 600; }
 .filters:hover, .refresh:hover, .clearSearch:hover { background: var(--surface-secondary); color: var(--primary); border-color: color-mix(in srgb, var(--primary) 35%, var(--border)); }
@@ -29,7 +30,21 @@
 :where(.card button, .card a, .chips button):focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
 .spinning { animation: spin .9s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-@media (max-width: 819px) { .card { align-items: center; } .search { flex: 1 1 100%; width: 100%; } .trailing { flex: 1; justify-content: flex-end; } }
-@media (max-width: 520px) { .card { padding: 12px; } .trailing { gap: 7px; } .actions { gap: 5px; } .primary :is(a,button), .secondary :is(a,button) { padding: 0 10px; } }
-@media (max-width: 767px) { .search input { font-size: 16px; } }
+@media (max-width: 819px) {
+  .card { align-items: center; }
+  .search { flex: 1 1 100%; width: 100%; }
+  .trailing { flex: 1; justify-content: flex-end; }
+}
+@media (max-width: 767px) {
+  .card { padding: 12px; column-gap: 8px; row-gap: 10px; }
+  .search { flex: 1 1 100%; height: 40px; padding-left: 12px; gap: 8px; border-radius: 10px; }
+  .search > svg { width: 16px; height: 16px; }
+  .search input, .search input::placeholder { font-size: var(--fs-base); line-height: 1.35; }
+  .filters, .refresh, .primary :is(a,button), .secondary :is(a,button) { height: 40px; border-radius: 10px; font-size: var(--fs-sm); }
+  .filters { margin-right: auto; }
+  .filters svg, .refresh svg, .actions svg { width: 16px; height: 16px; }
+  .trailing { flex: 0 1 auto; margin-left: auto; gap: 8px; }
+  .actions { gap: 6px; }
+  .primary :is(a,button), .secondary :is(a,button) { padding: 0 11px; }
+}
 @media (prefers-reduced-motion: reduce) { .spinning { animation: none; } .primary :is(a,button):hover { transform: none; } }

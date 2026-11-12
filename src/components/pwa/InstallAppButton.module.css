@@ -1,0 +1,9 @@
+.backdrop { position: fixed; z-index: 600; inset: 0; display: grid; place-items: center; padding: 18px; background: var(--overlay-backdrop); }
+.dialog { position: relative; width: min(385px,100%); padding: 28px; border-radius: 20px; background: var(--card-background); box-shadow: var(--card-shadow-hover); text-align: center; color: var(--text-primary); }
+.dialog img { display: block; margin: 0 auto 14px; border-radius: 14px; }
+.dialog h2 { font-size: var(--fs-xl); font-weight: 650; }
+.dialog p { display: block; margin: 12px 0 20px; color: var(--text-secondary); font-size: var(--fs-base); line-height: 1.65; }
+.dialog p svg { display: inline-block; vertical-align: text-bottom; color: var(--primary); }
+.close { position: absolute; right: 11px; top: 11px; width: 34px; height: 34px; border: 0; border-radius: 10px; display: grid; place-items: center; background: var(--surface-secondary); color: var(--text-secondary); }
+.done { height: 40px; border: 0; border-radius: 11px; padding: 0 22px; background: var(--brand-gradient); color: #fff; font-size: var(--fs-sm); font-weight: 600; }
+:where(.close,.done):focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; }

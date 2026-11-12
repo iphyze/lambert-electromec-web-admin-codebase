@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 10px 18px;
+  padding: 10px max(18px, env(safe-area-inset-right)) 10px max(18px, env(safe-area-inset-left));
   border: 1px solid transparent;
   border-radius: 18px;
   background: color-mix(in srgb, var(--surface) 91%, transparent);
@@ -44,14 +44,14 @@
 .bell:focus-visible, .menuButton:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
 @media (max-width: 1099px) { .actions { gap: 7px; } }
 @media (max-width: 767px) {
-  .topBar { top: 0; border-radius: 0 0 16px 16px; min-height: 69px; padding: 9px 12px; }
+  .topBar { top: 0; border-radius: 0 0 16px 16px; min-height: 69px; padding: 9px max(12px, env(safe-area-inset-right)) 9px max(12px, env(safe-area-inset-left)); padding-top: max(9px, env(safe-area-inset-top)); }
   .menuButton { display: grid; }
   .title { font-size: 16px; }
   .actionDivider { display: none; }
   .topBar::before { display: none; }
 }
 @media (max-width: 440px) {
-  .topBar { gap: 8px; padding: 8px 12px; }
+  .topBar { gap: 8px; padding: max(8px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 8px max(12px, env(safe-area-inset-left)); }
   .left { gap: 8px; }
   .actions { gap: 5px; }
   .title { font-size: 13px; }
@@ -60,3 +60,7 @@
   .topBar { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
 @media (prefers-reduced-motion: reduce) { .topBar { transition: none; } }
+
+@media (display-mode: window-controls-overlay) {
+  .topBar { padding-left: max(18px, env(titlebar-area-x, 0px)); padding-top: max(10px, env(titlebar-area-y, 0px)); padding-right: max(18px, calc(100vw - env(titlebar-area-width, 100vw) - env(titlebar-area-x, 0px))); }
+}

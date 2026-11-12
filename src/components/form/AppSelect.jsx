@@ -43,6 +43,7 @@ export default function AppSelect({
   return (
     <div className={`${styles.wrap} ${disabled ? styles.disabled : ""} ${invalid ? styles.invalid : ""} ${className}`.trim()}>
       <Select
+        unstyled
         instanceId={`app-select-${reactId}`}
         inputId={`app-select-input-${reactId}`}
         name={name}

@@ -1,23 +1,31 @@
-.trigger { min-height: var(--header-control-height); min-width: 178px; padding: 0 10px 0 13px; display: flex; align-items: center; gap: 9px; border: 1px solid var(--border); border-radius: var(--header-control-radius); background: var(--surface-secondary); color: var(--text-secondary); font-size: 11px; font-weight: 650; text-align: left; }
+.trigger { min-height: var(--header-control-height); min-width: 178px; padding: 0 10px 0 13px; display: flex; align-items: center; gap: 9px; border: 1px solid var(--border); border-radius: var(--header-control-radius); background: var(--surface-secondary); color: var(--text-secondary); font-size: var(--fs-xs); font-weight: 600; text-align: left; }
 .trigger:hover { color: var(--text-primary); background: var(--accent-soft); }
-.shortcut { margin-left: auto; padding: 3px 6px; border: 1px solid var(--border); border-radius: 5px; font-size: 10px; color: var(--text-muted); background: var(--surface); }
+.shortcut { margin-left: auto; padding: 3px 6px; border: 1px solid var(--border); border-radius: 5px; font-size: var(--fs-2xs); color: var(--text-muted); background: var(--surface); }
 .overlay { position: fixed; inset: 0; z-index: 300; display: flex; justify-content: center; align-items: flex-start; padding: min(18vh, 120px) 16px 24px; background: var(--overlay-backdrop); }
 .dialog { width: min(560px, 100%); max-height: min(620px, 80svh); display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border); border-radius: 20px; background: var(--surface-card); box-shadow: var(--shadow-lg); }
 .searchRow { display: flex; align-items: center; gap: 12px; padding: 15px 17px; border-bottom: 1px solid var(--border); }
 .searchIcon { flex-shrink: 0; color: var(--primary); }
-.input { flex: 1; min-width: 0; padding: 6px 0; border: none; outline: 0; color: var(--text-primary); background: transparent; font-size: 13px; }
+.input { flex: 1; min-width: 0; padding: 6px 0; border: none; outline: 0; color: var(--text-primary); background: transparent; font-size: var(--fs-base); font-weight: 400; text-overflow: ellipsis; white-space: nowrap; }
+.input::placeholder { color: var(--text-placeholder); opacity: 1; text-overflow: ellipsis; }
 .input:focus-visible { outline: 0; }
 .closeButton { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-secondary); color: var(--text-secondary); }
 .results { overflow-y: auto; min-height: 100px; padding: 9px; scrollbar-width: thin; }
 .result { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 53px; border: 0; border-radius: 11px; padding: 7px 10px; background: transparent; color: var(--text-primary); text-align: left; }
 .result:hover, .selected { background: var(--accent-soft); }
 .resultIcon { width: 34px; height: 34px; display: grid; place-items: center; flex-shrink: 0; border: 1px solid var(--border); border-radius: 10px; color: var(--primary); background: var(--surface-secondary); }
-.resultName { flex: 1; min-width: 0; display: grid; font-size: 11px; font-weight: 650; }
+.resultName { flex: 1; min-width: 0; display: grid; font-size: var(--fs-xs); font-weight: 600; }
 .resultName small { margin-top: 1px; color: var(--text-muted); font-size: var(--fs-2xs); font-weight: 500; }
-.enterHint { color: var(--text-muted); font-size: 13px; }
-.empty { padding: 22px; text-align: center; color: var(--text-secondary); font-size: 12px; }
-.footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px; padding: 10px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 10px; }
+.enterHint { color: var(--text-muted); font-size: var(--fs-base); }
+.empty { padding: 22px; text-align: center; color: var(--text-secondary); font-size: var(--fs-sm); }
+.footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px; padding: 10px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: var(--fs-2xs); }
 .trigger:focus-visible, .closeButton:focus-visible, .result:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
 @media (max-width: 960px) { .trigger { min-width: var(--header-control-height); width: var(--header-control-height); justify-content: center; padding: 0; } .triggerText, .shortcut { display: none; } }
-@media (max-width: 460px) { .overlay { padding-top: 64px; } .footer { gap: 9px; } }
+@media (max-width: 767px) {
+  .overlay { padding: 64px 12px 18px; }
+  .searchRow { height: 58px; gap: 8px; padding: 9px 12px; }
+  .searchIcon { width: 16px; height: 16px; }
+  .input { height: 40px; padding: 0; font-size: var(--fs-base); line-height: 1.35; }
+  .input::placeholder { font-size: var(--fs-base); }
+  .footer { gap: 9px; }
+}
 @media (prefers-reduced-transparency: reduce) { .overlay { background: var(--overlay-backdrop-solid); } }

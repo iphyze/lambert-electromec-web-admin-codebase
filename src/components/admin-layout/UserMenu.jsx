@@ -8,6 +8,8 @@ import { Check, ChevronDown, LogOut, Monitor, Moon, Settings2, Sun } from "lucid
 import { logoutRequest } from "@/lib/api/client";
 import { useAuthStore } from "@/stores/authStore";
 import { roleLabels } from "./navigation";
+import InstallAppButton from "@/components/pwa/InstallAppButton";
+import { clearPwaRuntimeCaches } from "@/components/pwa/pwaCache";
 import styles from "./UserMenu.module.css";
 
 const THEMES = [
@@ -65,7 +67,7 @@ export default function UserMenu() {
     if (loggingOut) return;
     setLoggingOut(true);
     try { await logoutRequest(); } catch { /* Clear session and leave the admin area anyway. */ }
-    finally { router.replace("/login"); setLoggingOut(false); setOpen(false); }
+    finally { await clearPwaRuntimeCaches(); router.replace("/login"); setLoggingOut(false); setOpen(false); }
   };
 
   return (
@@ -111,6 +113,7 @@ export default function UserMenu() {
               <Icon size={16} />{label}<Check size={15} className={styles.check} aria-hidden="true" style={{ visibility: mounted && theme === value ? "visible" : "hidden" }} />
             </button>
           ))}
+          <InstallAppButton role="menuitem" tabIndex={-1} className={styles.menuItem} onSelect={() => setOpen(false)} />
           <div className={styles.separator} />
           <button role="menuitem" tabIndex={-1} type="button" className={`${styles.menuItem} ${styles.danger}`} disabled={loggingOut} onClick={handleLogout}>
             <LogOut size={16} />{loggingOut ? "Signing out…" : "Sign out"}

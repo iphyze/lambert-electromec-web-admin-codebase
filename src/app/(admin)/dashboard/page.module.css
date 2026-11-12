@@ -104,6 +104,7 @@
 .quickActions { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin: 0; }
 .quickActions a { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 0 10px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface-secondary); color: var(--text-secondary); font-size: var(--fs-2xs); font-weight: 600; }
 .activityCard { grid-column: 1 / -1; min-width: 0; }
+.activityCard .cardHead h2 { font-size: var(--fs-lg); font-weight: 600; }
 .timeline { position: relative; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); width: 100%; min-width: 0; margin: 4px 0 18px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .timelineSvg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .timelineGridLine { stroke: var(--border); stroke-dasharray: 3 6; stroke-width: 1; }
@@ -155,19 +156,34 @@
 .summaryTitle { display: flex; flex-wrap: wrap; align-items: baseline; gap: 9px; min-width: 0; }
 .sectionTitle { margin: 3px 1px 12px; color: var(--text-primary); font-size: var(--fs-lg); font-weight: 600; line-height: 1.35; }
 
-/* Each publishing metric is a separate card, with its own link, donut and status breakdown. */
+/* Individual, vertically balanced publishing cards: shared color drives both arc and track. */
 .publishingSection { grid-column: 1 / -1; min-width: 0; }
 .publishingGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; gap: 17px; min-width: 0; }
-.publicationCardBody { display: flex; align-items: center; justify-content: flex-start; gap: 18px; min-width: 0; }
-.publicationDetails { display: flex; flex-direction: column; justify-content: center; gap: 10px; flex: 1; min-width: 0; }
-.publicationCount { margin: 0; color: var(--text-secondary); font-size: var(--fs-sm); line-height: 1.5; }
+.publishingCard { min-height: 318px; }
+.publishingCard .cardContent { justify-content: center; }
+.publicationTone0 { --publication-color: var(--primary); }
+.publicationTone1 { --publication-color: var(--chart-teal); }
+.publicationTone2 { --publication-color: var(--chart-amber); }
+.publicationCardBody { display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 11px; min-width: 0; text-align: center; }
+.publicationMetric { position: relative; display: grid; place-items: center; flex: 0 0 150px; width: 150px; height: 150px; }
+.publicationSvg { display: block; width: 150px; height: 150px; overflow: visible; }
+.donutTrack, .donutProgress { fill: none; stroke-width: 12px; }
+.donutTrack { stroke: color-mix(in srgb, var(--publication-color) 18%, transparent); }
+.donutProgress { stroke: var(--publication-color); stroke-linecap: round; animation: donutReveal 260ms ease-out both; }
+.donutValue { fill: var(--text-primary); font-weight: 650; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.donutNumber { font-size: 34px; }
+.donutPercent { font-size: 20px; letter-spacing: -.01em; }
+.donutInnerLabel { fill: var(--text-muted); font-size: 11.5px; font-weight: 500; }
+.donutTooltip { position: absolute; bottom: calc(100% + 5px); left: 50%; z-index: 2; max-width: 200px; width: max-content; transform: translateX(-50%); padding: 6px 9px; border-radius: 8px; background: var(--text-primary); color: var(--background); font-size: var(--fs-xs); box-shadow: var(--card-shadow); pointer-events: none; }
+@keyframes donutReveal { from { stroke-dasharray: 0 100; } to { stroke-dasharray: var(--donut-fill); } }
+.publicationCount { margin: 0; color: var(--text-secondary); font-size: var(--fs-sm); line-height: 1.35; }
 .publicationCount strong { color: var(--text-primary); font-size: var(--fs-md); font-weight: 650; font-variant-numeric: tabular-nums; }
-.publicationChips { display: flex; flex-wrap: wrap; gap: 6px; }
-.publicationChips span { display: inline-flex; align-items: center; padding: 4px 8px; border-radius: 999px; font-size: var(--fs-2xs); line-height: 1.3; font-weight: 600; white-space: nowrap; }
-.publishedChip { background: var(--accent-soft); color: var(--primary); }
+.publicationChips { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 7px; }
+.publicationChips span { display: inline-flex; align-items: center; justify-content: center; padding: 4px 9px; border-radius: 999px; font-size: var(--fs-2xs); line-height: 1.3; font-weight: 600; white-space: nowrap; }
+.publishedChip { background: color-mix(in srgb, var(--publication-color) 13%, transparent); color: var(--publication-color); }
 .pendingChip { background: color-mix(in srgb, var(--chart-amber) 12%, var(--surface-secondary)); color: var(--warning); }
-.publicationNote { display: flex; align-items: center; gap: 5px; margin: 0; color: var(--text-muted); font-size: var(--fs-xs); line-height: 1.45; }
-.publicationNote svg { flex-shrink: 0; color: var(--primary); }
+.publicationNote { display: flex; align-items: center; justify-content: center; gap: 5px; margin: 0; color: var(--text-muted); font-size: var(--fs-xs); line-height: 1.45; text-align: center; }
+.publicationNote svg { flex-shrink: 0; color: var(--publication-color); }
 
 /* Content summary row — actual CMS counts, never placeholder numbers. */
 .summarySection { grid-column: 1 / -1; min-width: 0; }
@@ -184,16 +200,6 @@
 .summaryChips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; }
 .summaryChips span { padding: 3px 6px; border-radius: 999px; background: var(--surface-secondary); color: var(--text-muted); font-size: var(--fs-2xs); line-height: 1.3; }
 .summaryRetry { align-self: flex-start; margin: 0 10px 10px; padding: 4px 8px; border: 0; border-radius: 8px; color: var(--danger); background: color-mix(in srgb, var(--danger) 9%, transparent); font-size: var(--fs-xs); }
-.publishingCard { min-height: 198px; }
-.publicationMetric { position: relative; display: grid; place-items: center; flex: 0 0 120px; width: 120px; height: 120px; }
-.publicationSvg { display: block; width: 120px; height: 120px; overflow: visible; }
-.donutTrack { fill: none; stroke: var(--surface-secondary); stroke-width: 11; }
-.donutTone0, .donutTone1, .donutTone2 { fill: none; stroke-width: 11; stroke-linecap: round; transition: stroke-dasharray 260ms ease; }
-.donutTone0 { stroke: var(--primary); }
-.donutTone1 { stroke: var(--chart-teal); }
-.donutTone2 { stroke: var(--chart-amber); }
-.donutValue { fill: var(--text-primary); font-size: 25px; font-weight: 650; letter-spacing: -.04em; }
-.donutTooltip { position: absolute; top: -20px; z-index: 2; width: max-content; padding: 5px 8px; border-radius: 8px; background: var(--text-primary); color: var(--background); font-size: var(--fs-2xs); box-shadow: var(--card-shadow); }
 .latestEnquiriesCard { min-height: 220px; }
 .enquiryStatus { display: inline-flex; align-items: center; justify-content: center; padding: 2px 6px; border-radius: 999px; background: var(--surface-secondary); color: var(--text-secondary); font-size: var(--fs-2xs); font-weight: 600; text-transform: capitalize; }
 .enquiryStatus.status_new { background: var(--accent-soft); color: var(--primary); }
@@ -241,11 +247,8 @@
   .sourceLegend { gap: 7px; }
   .summaryTiles { gap: 9px; }
   .summaryTileLink { padding: 11px; }
-  .publicationMetric { flex-basis: 108px; width: 108px; height: 108px; }
-  .publicationSvg { width: 108px; height: 108px; }
-  .publicationCardBody { gap: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .page *, .page *::before, .page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .page *, .page *::before, .page *::after { animation: none; transition: none; scroll-behavior: auto; }
   .summaryTile:not(.staticTile):hover, .summaryTile:not(.staticTile):focus-within { transform: none; }
 }

@@ -15,8 +15,9 @@ export default function DataTable({
   onRowClick, rowHref, selectedRow, unreadRow,
 }) {
   const descriptionId = useId();
-  const template = columns.map((column) => column.track || "minmax(92px,1fr)").join(" ");
-  const tabletTemplate = columns.filter((column) => !column.hideTablet).map((column) => column.track || "minmax(92px,1fr)").join(" ");
+  const trackFor = (column) => column.selection ? "48px" : column.track || "minmax(92px,1fr)";
+  const template = columns.map(trackFor).join(" ");
+  const tabletTemplate = columns.filter((column) => !column.hideTablet).map(trackFor).join(" ");
   const tableTracks = { "--table-columns": template, "--table-columns-tablet": tabletTemplate };
   const firstRowIndex = Math.max(0, (Number(page) - 1) * Number(limit || rows.length || 1));
   const keyFor = (row) => typeof rowKey === "function" ? rowKey(row) : row[rowKey];
@@ -27,8 +28,8 @@ export default function DataTable({
         <div role="rowgroup" className={styles.headerGroup}>
           <div role="row" aria-rowindex={1} className={styles.header} style={tableTracks}>
             {columns.map((column, index) => (
-              <div key={column.key} role="columnheader" aria-label={column.label || (column.selection ? "Select" : undefined)} className={[styles.headerCell, column.align === "right" ? styles.right : "", column.hideTablet ? styles.hideTablet : "", column.selection ? styles.selection : "", index === 0 || (index === 1 && columns[0]?.selection) ? styles.firstLabel : ""].filter(Boolean).join(" ")}>
-                {column.header ?? column.label}
+              <div key={column.key} role="columnheader" aria-label={column.label || (column.selection ? "Select" : undefined)} className={[styles.headerCell, (column.align === "right" || column.numeric || column.actions) ? styles.right : "", column.hideTablet ? styles.hideTablet : "", column.selection ? styles.selection : ""].filter(Boolean).join(" ")}>
+                {column.selection ? <span className={styles.headerCheckbox}>{column.header ?? column.label}</span> : column.header ?? column.label}
               </div>
             ))}
           </div>
@@ -56,9 +57,9 @@ export default function DataTable({
                 else if (rowHref) window.location.assign(rowHref(row));
               } : undefined}
             >
-              {columns.map((column) => <div key={column.key} role="cell" aria-label={column.label || undefined} className={[styles.cell, column.selection ? styles.selection : "", column.highlight ? styles.highlightCell : "", column.actions ? styles.actionsCell : "", column.hideTablet ? styles.hideTablet : "", column.mobileHide ? styles.hideMobile : "", column.align === "right" ? styles.right : "", column.numeric ? styles.numeric : "", column.identity ? styles.identityCell : ""].filter(Boolean).join(" ")}>
+              {columns.map((column) => <div key={column.key} role="cell" aria-label={column.label || undefined} className={[styles.cell, column.selection ? styles.selection : "", column.actions ? styles.actionsCell : "", column.hideTablet ? styles.hideTablet : "", column.mobileHide ? styles.hideMobile : "", (column.align === "right" || column.numeric || column.actions) ? styles.right : "", column.numeric ? styles.numeric : "", column.identity ? styles.identityCell : ""].filter(Boolean).join(" ")}>
                 {!column.selection && !column.actions && !column.identity && !column.mobileHide ? <span className={styles.mobileLabel} aria-hidden="true">{column.label}</span> : null}
-                <div className={column.highlight ? styles.highlightInner : styles.value}>{column.render?.(row)}</div>
+                <div className={styles.value}>{column.render?.(row)}</div>
               </div>)}
             </div>;
           }) : (

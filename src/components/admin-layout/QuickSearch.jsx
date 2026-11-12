@@ -4,7 +4,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { createPortal } from "react-dom";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { BriefcaseBusiness, Files, Moon, Search, Sun, X } from "lucide-react";
+import { BriefcaseBusiness, Download, Files, Moon, Search, Sun, X } from "lucide-react";
+import { usePwaInstall } from "@/components/pwa/InstallAppButton";
 import { useAuthStore } from "@/stores/authStore";
 import { useSidebarState } from "./useSidebarState";
 import { visibleNavigation } from "./navigation";
@@ -15,6 +16,7 @@ export default function QuickSearch() {
   const pathname = usePathname();
   const role = useAuthStore((state) => state.user?.role);
   const { resolvedTheme, setTheme } = useTheme();
+  const { available: installAvailable, ios: installIos, install } = usePwaInstall();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(0);
@@ -26,7 +28,8 @@ export default function QuickSearch() {
     { label: "New project", href: "/projects/new", icon: BriefcaseBusiness, section: "Quick actions", kind: "navigation" },
     { label: "New media item", href: "/media-center/new", icon: Files, section: "Quick actions", kind: "navigation" },
     { label: "Toggle theme", icon: resolvedTheme === "dark" ? Sun : Moon, section: "Quick actions", kind: "theme" },
-  ], [role, resolvedTheme]);
+    ...(installAvailable ? [{ label: installIos ? "Add to Home Screen" : "Install app", icon: Download, section: "Quick actions", kind: "install" }] : []),
+  ], [role, resolvedTheme, installAvailable, installIos]);
   const results = useMemo(() => {
     const text = query.trim().toLocaleLowerCase();
     return entries.filter((item) => !text || `${item.label} ${item.section}`.toLocaleLowerCase().includes(text));
@@ -73,6 +76,7 @@ export default function QuickSearch() {
     if (!entry) return;
     close();
     if (entry.kind === "theme") setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    else if (entry.kind === "install") install();
     else router.push(entry.href);
   };
   const onInputKeyDown = (event) => {

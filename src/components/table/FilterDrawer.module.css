@@ -22,5 +22,11 @@
 .apply { border: 0; background: var(--brand-gradient); color: #fff; }
 .apply:hover { box-shadow: 0 6px 16px color-mix(in srgb, var(--primary) 26%, transparent); transform: translateY(-1px); }
 :where(.close,.footer button):focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
-@media (max-width: 767px) { .body { --app-select-font-size: 16px; } }
+@media (max-width: 767px) {
+  .body { --app-control-height: 40px; --app-select-font-size: var(--fs-base); }
+  .body :is(input,textarea) { font-size: var(--fs-base); }
+  .body input::placeholder { color: var(--text-placeholder); text-overflow: ellipsis; }
+  .body input[type="search"] { height: 40px; min-width: 0; border-radius: 10px; }
+  .body :is(input,textarea,select) { max-width: 100%; }
+}
 @media (prefers-reduced-motion: reduce) { .root, .backdrop, .panel { transition: none; } .apply:hover { transform: none; } }

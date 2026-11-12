@@ -170,7 +170,7 @@
   .sidebar[data-tablet-open="true"] { width: var(--sidebar-width); box-shadow: var(--shadow-lg); }
 }
 @media (max-width: 767px) {
-  .sidebar { top: 0; bottom: 0; left: 0; width: min(310px, 88vw); border-radius: 0 20px 20px 0; border-left: 0; transform: translateX(-105%); transition: transform 210ms ease; padding: 16px 0 0; }
+  .sidebar { top: 0; bottom: 0; left: 0; width: min(310px, 88vw); border-radius: 0 20px 20px 0; border-left: 0; transform: translateX(-105%); transition: transform 210ms ease; padding: max(16px, env(safe-area-inset-top)) 0 env(safe-area-inset-bottom); }
   .sidebar[data-mobile-open="true"] { transform: translateX(0); }
 
 }
