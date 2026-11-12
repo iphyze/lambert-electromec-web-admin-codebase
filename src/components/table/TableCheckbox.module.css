@@ -1,0 +1,66 @@
+.checkbox {
+  width: 18px;
+  height: 18px;
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.checkbox input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.visual {
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--text-muted) 44%, var(--border));
+  border-radius: 5px;
+  background: var(--input-background);
+  color: #fff;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 5%, transparent);
+  transition: border-color .18s ease, background-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+.checkbox:hover .visual {
+  border-color: color-mix(in srgb, var(--accent) 54%, var(--border));
+  background: color-mix(in srgb, var(--accent) 5%, var(--input-background));
+}
+
+.checkbox input:checked + .visual,
+.checkbox input:indeterminate + .visual {
+  border-color: color-mix(in srgb, var(--accent) 76%, var(--border));
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.checkbox:focus-within .visual {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+.disabled .visual {
+  opacity: .38;
+  background: color-mix(in srgb, var(--surface-secondary) 75%, var(--input-background));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visual { transition: none; }
+}
+
+.checkbox input:focus-visible {
+  outline: 0 !important;
+}

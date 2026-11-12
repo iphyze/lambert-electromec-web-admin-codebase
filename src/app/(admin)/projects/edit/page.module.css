@@ -1,0 +1,6 @@
+.loading { min-height: 45svh; display: grid; place-items: center; color: var(--text-secondary); font-size: 10px; }
+.invalidState { min-height: 48svh; display: grid; place-items: center; align-content: center; gap: 7px; text-align: center; }
+.invalidState > span { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 13px; background: color-mix(in srgb, var(--warning) 10%, var(--surface-card)); color: var(--warning); }
+.invalidState h1 { margin-top: 4px; font-size: 20px; letter-spacing: -.03em; }
+.invalidState p { color: var(--text-secondary); font-size: var(--fs-2xs); }
+.invalidState a { margin-top: 6px; min-height: 38px; padding: 0 12px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-card); color: var(--text-primary); font-size: var(--fs-2xs); font-weight: 650; }

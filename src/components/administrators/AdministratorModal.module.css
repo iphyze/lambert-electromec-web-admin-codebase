@@ -1,0 +1,31 @@
+.backdrop { position: fixed; inset: 0; z-index: 2100; display: grid; place-items: center; padding: 18px; background: rgba(3, 11, 23, .64); backdrop-filter: blur(4px); }
+.modal{ width: min(680px, 100%); max-height: min(760px, calc(100vh - 36px)); overflow: auto; border: 0; outline: 1px solid transparent; border-radius: 18px; background: var(--card-background); box-shadow: var(--card-shadow); }
+.securityModal { width: min(560px, 100%); }
+.modal header { position: sticky; top: 0; z-index: 2; padding: 17px 18px 14px; display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; border-bottom: 1px solid var(--border); background: linear-gradient(135deg, color-mix(in srgb, var(--surface-card) 94%, var(--primary)), var(--surface-card)); }
+.modal header span { display: block; margin-bottom: 4px; color: var(--accent); font-size: var(--fs-2xs); font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+.modal header h2 { font-size: 16px; }
+.modal header p { margin-top: 4px; color: var(--text-secondary); font-size: var(--fs-2xs); }
+.modal header button { width: 34px; height: 34px; flex: 0 0 34px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-card); color: var(--text-primary); }
+.body { padding: 17px 18px; }
+.error, .success { margin-bottom: 11px; padding: 9px 11px; border-radius: 10px; font-size: var(--fs-2xs); }
+.error { border: 1px solid color-mix(in srgb, var(--danger) 30%, var(--border)); background: color-mix(in srgb, var(--danger) 8%, var(--surface-card)); color: var(--danger); }
+.success { display: flex; align-items: center; gap: 6px; border: 1px solid color-mix(in srgb, var(--success) 28%, var(--border)); background: color-mix(in srgb, var(--success) 8%, var(--surface-card)); color: var(--success); }
+.twoCol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.body label { min-width: 0; margin-bottom: 11px; display: grid; gap: 5px; color: var(--text-secondary); font-size: var(--fs-2xs); font-weight: 650; }
+.body input { width: 100%; min-width: 0; min-height: 42px; padding: 0 11px; border: 1px solid var(--border); border-radius: 10px; outline: 0; background: var(--input-background); color: var(--text-primary); font-size: 10px; }
+.body input:focus-visible { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent); }
+.body input:disabled { cursor: not-allowed; opacity: .7; background: color-mix(in srgb, var(--surface-secondary) 75%, var(--input-background)); }
+.body small { color: var(--text-muted); font-size: var(--fs-2xs); font-weight: 500; line-height: 1.45; }
+.note { margin-top: 2px; padding: 11px; display: flex; align-items: flex-start; gap: 9px; border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border)); border-radius: 11px; background: color-mix(in srgb, var(--accent) 5%, var(--surface-card)); color: var(--accent); }
+.note > div { min-width: 0; }
+.note strong, .note span { display: block; }
+.note strong { color: var(--text-primary); font-size: var(--fs-2xs); }
+.note span { margin-top: 3px; color: var(--text-secondary); font-size: var(--fs-2xs); line-height: 1.55; }
+.modal footer { position: sticky; bottom: 0; z-index: 2; padding: 11px 18px; display: flex; justify-content: flex-end; gap: 7px; border-top: 1px solid var(--border); background: color-mix(in srgb, var(--surface-secondary) 45%, var(--surface-card)); }
+.modal footer button { min-height: 37px; padding: 0 12px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-card); color: var(--text-primary); font-size: var(--fs-2xs); font-weight: 650; }
+.modal footer button:last-child { border: 0; background: linear-gradient(135deg, var(--primary), var(--accent)); color: var(--on-accent); }
+.modal button:disabled { cursor: not-allowed; opacity: .65; }
+.spin { animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 560px) { .twoCol { grid-template-columns: 1fr; } .modal header p { display: none; } }
+@media (prefers-reduced-motion: reduce) { .backdrop { backdrop-filter: none; } .spin { animation: none; } }

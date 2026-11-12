@@ -1,0 +1,21 @@
+.actions { display: inline-flex; align-items: center; justify-content: flex-end; gap: 6px; white-space: nowrap; }
+.action { display: inline-flex; }
+.actionButton { display: grid; place-items: center; width: 34px; height: 34px; padding: 0; flex: 0 0 34px; border: 0; border-radius: 10px; color: var(--text-secondary); background: var(--surface-secondary); transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms ease; }
+.actionButton svg { transition: transform 180ms ease; }
+.edit { background: var(--accent-soft); color: var(--primary); }
+.warning { background: color-mix(in srgb, var(--warning) 12%, var(--surface-card)); color: var(--warning); }
+.danger { background: color-mix(in srgb, var(--danger) 12%, var(--surface-card)); color: var(--danger); }
+.actionButton:hover:not(:disabled) { transform: translateY(-1px); background: var(--text-secondary); color: #fff; box-shadow: 0 4px 12px color-mix(in srgb, var(--text-secondary) 25%, transparent); }
+.edit:hover:not(:disabled) { background: var(--brand-gradient); box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 26%, transparent); }
+.warning:hover:not(:disabled) { background: var(--warning); box-shadow: 0 4px 12px color-mix(in srgb, var(--warning) 24%, transparent); }
+.danger:hover:not(:disabled) { background: var(--danger); box-shadow: 0 4px 12px color-mix(in srgb, var(--danger) 24%, transparent); }
+.edit:hover:not(:disabled) svg { transform: rotate(-6deg) scale(1.08); }
+.danger:hover:not(:disabled) svg { transform: rotate(3deg) scale(1.08); }
+.actionButton:active:not(:disabled) { transform: scale(.96); }
+.actionButton:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; }
+.actionButton:disabled { cursor: not-allowed; opacity: .5; }
+.menu { position: fixed; z-index: 200; display: grid; gap: 2px; min-width: 215px; padding: 7px; border-radius: 13px; background: var(--card-background); box-shadow: var(--card-shadow-hover); outline: 1px solid var(--border); }
+.menuAction { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 3px 7px; border-radius: 9px; }
+.menuAction:hover, .menuAction:focus-within { background: var(--surface-secondary); }
+.menuLabel { flex: 1; overflow: hidden; text-overflow: ellipsis; color: var(--text-secondary); font-size: var(--fs-xs); font-weight: 500; }
+@media (prefers-reduced-motion: reduce) { .actionButton, .actionButton svg { transition: color 160ms ease, background-color 160ms ease; } .actionButton:hover:not(:disabled), .actionButton:active:not(:disabled), .actionButton:hover:not(:disabled) svg { transform: none; } }

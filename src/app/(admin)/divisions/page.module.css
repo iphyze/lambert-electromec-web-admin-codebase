@@ -1,0 +1,21 @@
+.page { width: 100%; min-width: 0; }
+.pageHead { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.kicker { display: block; margin-bottom: 6px; color: var(--primary); font-size: var(--fs-2xs); font-weight: 600; letter-spacing: .09em; text-transform: uppercase; }
+.pageHead h1 { font-size: clamp(25px, 3vw, 36px); font-weight: 650; line-height: 1.1; letter-spacing: -.04em; }
+.pageHead p { max-width: 720px; margin-top: 8px; color: var(--text-secondary); font-size: var(--fs-sm); font-weight: 400; line-height: 1.65; }
+.errorBanner { margin-top: 14px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid color-mix(in srgb, var(--danger) 30%, var(--border)); border-radius: 11px; background: color-mix(in srgb, var(--danger) 8%, var(--surface-card)); color: var(--danger); font-size: var(--fs-sm); }
+.errorBanner button { min-height: 34px; padding: 6px 10px; border: 0; border-radius: 8px; background: var(--danger); color: var(--on-danger); font-size: var(--fs-sm); font-weight: 600; }
+.errorBanner button:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+@media (max-width: 650px) { .pageHead { align-items: stretch; flex-direction: column; } }
+
+.futureNote { margin-top: 14px; padding: 13px 14px; border: 0; border-radius: 13px; background: var(--card-background); box-shadow: var(--card-shadow); outline: 1px solid transparent; display: flex; align-items: flex-start; gap: 10px; }
+.futureNote strong, .futureNote span { display: block; }
+.futureNote strong { color: var(--text-primary); font-size: var(--fs-sm); font-weight: 600; }
+.futureNote span { margin-top: 3px; color: var(--text-secondary); font-size: var(--fs-sm); line-height: 1.6; }
+.keyCell { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.keyCell code, .keyCell span { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--fs-xs); }
+.keyCell code { color: var(--primary); font-weight: 600; }
+.keyCell span { color: var(--text-muted); }
+.projectCount { display: flex; flex-direction: column; gap: 3px; font-variant-numeric: tabular-nums; }
+.projectCount strong { color: var(--text-primary); font-size: var(--fs-sm); font-weight: 600; }
+.projectCount span { color: var(--text-muted); font-size: var(--fs-xs); }

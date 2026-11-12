@@ -1,0 +1,62 @@
+.topBar {
+  position: sticky;
+  top: var(--layout-inset);
+  z-index: 120;
+  min-height: var(--admin-header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 91%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  backdrop-filter: blur(18px) saturate(130%);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+/* Extend the page-coloured surface above the sticky bar to mask its floating gap.
+   The strip scrolls with the sticky bar and keeps content invisible above it. */
+.topBar::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: calc(-1 * var(--layout-inset));
+  right: calc(-1 * var(--layout-inset));
+  top: calc(-1 * var(--layout-inset) - 1px);
+  height: calc(var(--layout-inset) + 1px);
+  background: var(--background);
+  pointer-events: none;
+}
+.scrolled { border-color: var(--border); box-shadow: var(--shadow-md); }
+.left { display: flex; align-items: center; min-width: 0; flex: 1; gap: 12px; }
+.titles { min-width: 0; }
+.breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 13px; color: var(--text-muted); font-size: var(--fs-2xs); font-weight: 600; letter-spacing: .025em; }
+.slash { color: var(--primary); }
+.title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 2px 0 0; color: var(--text-primary); font-size: clamp(17px, 1.6vw, 21px); font-weight: 650; letter-spacing: -.035em; line-height: 1.25; }
+.actions { display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; gap: 9px; }
+.bell { position: relative; width: var(--header-control-height); height: var(--header-control-height); flex-shrink: 0; display: grid; place-items: center; border: 1px solid var(--border); border-radius: var(--header-control-radius); background: var(--surface-secondary); color: var(--text-secondary); }
+.bell:hover { color: var(--primary); background: var(--accent-soft); }
+.notice { position: absolute; top: -4px; right: -4px; min-width: 18px; height: 18px; padding: 0 3px; display: grid; place-items: center; border: 2px solid var(--surface); border-radius: 20px; background: var(--notification-background); color: var(--notification-text); font-size: var(--fs-2xs); font-weight: 700; }
+.actionDivider { height: 24px; width: 1px; margin-inline: 2px; background: var(--border); }
+.menuButton { width: var(--header-control-height); height: var(--header-control-height); flex-shrink: 0; display: none; place-items: center; border: 1px solid var(--border); border-radius: var(--header-control-radius); background: var(--surface-secondary); color: var(--text-primary); }
+.bell:focus-visible, .menuButton:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+@media (max-width: 1099px) { .actions { gap: 7px; } }
+@media (max-width: 767px) {
+  .topBar { top: 0; border-radius: 0 0 16px 16px; min-height: 69px; padding: 9px 12px; }
+  .menuButton { display: grid; }
+  .title { font-size: 16px; }
+  .actionDivider { display: none; }
+  .topBar::before { display: none; }
+}
+@media (max-width: 440px) {
+  .topBar { gap: 8px; padding: 8px 12px; }
+  .left { gap: 8px; }
+  .actions { gap: 5px; }
+  .title { font-size: 13px; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .topBar { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@media (prefers-reduced-motion: reduce) { .topBar { transition: none; } }

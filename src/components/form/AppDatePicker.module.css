@@ -1,0 +1,191 @@
+.wrap {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+}
+
+.wrap :global(.react-datepicker-wrapper),
+.wrap :global(.react-datepicker__input-container) {
+  width: 100%;
+  display: block;
+}
+
+.input {
+  width: 100%;
+  min-height: var(--app-control-height, 42px);
+  padding: 0 36px 0 36px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  outline: 0;
+  background: var(--input-background);
+  color: var(--text-primary);
+  font-size: 10px;
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.input:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent) 32%, var(--border));
+}
+
+.input:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 13%, transparent);
+}
+
+.invalid .input,
+.invalid .input:hover,
+.invalid .input:focus-visible {
+  border-color: var(--danger);
+}
+
+.invalid .input:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 14%, transparent);
+}
+
+.input::placeholder {
+  color: var(--text-placeholder);
+}
+
+.leadingIcon {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-muted);
+}
+
+.clearButton {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  right: 9px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.clearButton:hover {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: var(--accent);
+}
+
+.disabled {
+  opacity: .62;
+}
+
+.disabled .input {
+  cursor: not-allowed;
+}
+
+.popper {
+  z-index: 5200 !important;
+}
+
+.calendar {
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 14%, var(--border)) !important;
+  border-radius: 14px !important;
+  background: var(--surface-card) !important;
+  box-shadow: var(--shadow-lg) !important;
+  color: var(--text-primary) !important;
+  font-family: inherit !important;
+  font-size: 10px !important;
+}
+
+.calendar :global(.react-datepicker__header) {
+  padding-top: 12px !important;
+  border-bottom: 1px solid var(--border) !important;
+  background: color-mix(in srgb, var(--surface-secondary) 58%, var(--surface-card)) !important;
+}
+
+.calendar :global(.react-datepicker__current-month),
+.calendar :global(.react-datepicker-time__header),
+.calendar :global(.react-datepicker-year-header) {
+  color: var(--text-primary) !important;
+  font-size: 10.5px !important;
+  font-weight: 800 !important;
+}
+
+.calendar :global(.react-datepicker__day-name) {
+  color: var(--text-muted) !important;
+  font-size: 8.5px !important;
+  font-weight: 750 !important;
+}
+
+.calendar :global(.react-datepicker__day),
+.calendar :global(.react-datepicker__time-name) {
+  border-radius: 8px !important;
+  color: var(--text-secondary) !important;
+  font-size: 9.5px !important;
+}
+
+.calendar :global(.react-datepicker__day:hover) {
+  background: color-mix(in srgb, var(--primary) 9%, var(--surface-card)) !important;
+  color: var(--text-primary) !important;
+}
+
+.calendar :global(.react-datepicker__day--selected),
+.calendar :global(.react-datepicker__day--keyboard-selected) {
+  background: var(--primary) !important;
+  color: #fff !important;
+}
+
+.calendar :global(.react-datepicker__day--outside-month),
+.calendar :global(.react-datepicker__day--disabled) {
+  color: color-mix(in srgb, var(--text-muted) 52%, transparent) !important;
+}
+
+.calendar :global(.react-datepicker__navigation-icon::before) {
+  border-color: var(--text-secondary) !important;
+}
+
+.calendar :global(.react-datepicker__time-container) {
+  border-left: 1px solid var(--border) !important;
+}
+
+.calendar :global(.react-datepicker__time-container .react-datepicker__time) {
+  background: var(--surface-card) !important;
+}
+
+.calendar :global(.react-datepicker__time-list-item) {
+  color: var(--text-secondary) !important;
+  font-size: 9px !important;
+}
+
+.calendar :global(.react-datepicker__time-list-item:hover) {
+  background: color-mix(in srgb, var(--primary) 9%, var(--surface-card)) !important;
+  color: var(--text-primary) !important;
+}
+
+.calendar :global(.react-datepicker__time-list-item--selected) {
+  background: var(--primary) !important;
+  color: #fff !important;
+  font-weight: 750 !important;
+}
+
+:global(#app-datepicker-portal) {
+  position: relative;
+  z-index: 5100;
+}
+
+@media (max-width: 650px) {
+  .input {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .input,
+  .clearButton {
+    transition: none;
+  }
+}

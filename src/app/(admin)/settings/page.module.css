@@ -1,0 +1,81 @@
+.page { width: 100%; }
+.pageHead { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.kicker { display: block; margin-bottom: 6px; color: var(--accent); font-size: var(--fs-2xs); font-weight: 650; letter-spacing: .09em; text-transform: uppercase; }
+.pageHead h1 { font-size: clamp(25px, 3vw, 36px); line-height: 1.1; letter-spacing: -.04em; }
+.pageHead p { max-width: 760px; margin-top: 8px; color: var(--text-secondary); font-size: 11px; line-height: 1.65; }
+.headActions { display: flex; align-items: center; gap: 8px; }
+.primaryButton, .secondaryButton { min-height: 37px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border-radius: 9px; font-size: var(--fs-2xs); font-weight: 650; white-space: nowrap; }
+.primaryButton { border: 1px solid var(--accent); background: var(--accent); color: var(--on-accent); }
+.secondaryButton { border: 1px solid var(--border); background: var(--surface-card); color: var(--text-secondary); }
+.primaryButton:disabled, .secondaryButton:disabled { opacity: .52; cursor: not-allowed; }
+.securityNote { margin-top: 17px; padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px; border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border)); border-radius: 13px; background: color-mix(in srgb, var(--accent) 5%, var(--surface-card)); }
+.securityNote > span { width: 34px; height: 34px; flex: 0 0 34px; display: grid; place-items: center; border-radius: 9px; background: var(--accent-soft); color: var(--accent); }
+.securityNote strong { display: block; color: var(--text-primary); font-size: var(--fs-2xs); }
+.securityNote p { margin-top: 3px; color: var(--text-secondary); font-size: var(--fs-2xs); line-height: 1.55; }
+.errorBanner, .successBanner { margin-top: 12px; padding: 10px 12px; border-radius: 10px; font-size: var(--fs-2xs); font-weight: 650; }
+.errorBanner { border: 1px solid color-mix(in srgb, var(--danger) 30%, var(--border)); background: color-mix(in srgb, var(--danger) 8%, var(--surface-card)); color: var(--danger); }
+.successBanner { display: flex; align-items: center; gap: 6px; border: 1px solid color-mix(in srgb, var(--success) 30%, var(--border)); background: color-mix(in srgb, var(--success) 8%, var(--surface-card)); color: var(--success); }
+.contentGrid { margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1fr) 300px; align-items: start; gap: 14px; }
+.settingsColumn { display: grid; gap: 13px; }
+.panel, .environmentPanel, .loadingPanel { border: 0; outline: 1px solid transparent; border-radius: 18px; background: var(--card-background); box-shadow: var(--card-shadow); }
+.panel { overflow: hidden; }
+.panelHead, .environmentHead { padding: 12px 13px; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid var(--border); background: color-mix(in srgb, var(--surface-secondary) 35%, var(--surface-card)); }
+.panelHead > span, .environmentHead > span { width: 34px; height: 34px; flex: 0 0 34px; display: grid; place-items: center; border-radius: 9px; background: var(--accent-soft); color: var(--accent); }
+.panelHead h2, .environmentHead h2 { font-size: var(--fs-md); font-weight: 600; }
+.panelHead p, .environmentHead p { margin-top: 2px; color: var(--text-muted); font-size: var(--fs-2xs); }
+.settingList { display: grid; }
+.settingRow { min-height: 90px; padding: 13px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(200px, 280px); align-items: center; gap: 20px; border-bottom: 1px solid color-mix(in srgb, var(--border) 72%, transparent); }
+.settingRow:last-child { border-bottom: 0; }
+.settingTitleRow { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; }
+.settingCopy strong { color: var(--text-primary); font-size: var(--fs-2xs); }
+.settingCopy p { max-width: 720px; margin-top: 4px; color: var(--text-secondary); font-size: var(--fs-2xs); line-height: 1.55; }
+.settingCopy code { display: inline-block; margin-top: 5px; color: var(--text-muted); font-size: var(--fs-2xs); }
+.sourceBadge { padding: 3px 6px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface-secondary); color: var(--text-muted); font-size: var(--fs-2xs); font-weight: 650; }
+.overrideBadge { border-color: color-mix(in srgb, var(--accent) 28%, var(--border)); background: color-mix(in srgb, var(--accent) 7%, var(--surface-card)); color: var(--accent); }
+.settingActions { display: flex; align-items: center; justify-content: flex-end; gap: 7px; }
+.inputWrap { min-width: 150px; display: flex; align-items: center; gap: 6px; }
+.inputWrap > span { color: var(--text-muted); font-size: var(--fs-2xs); }
+.input { width: 100%; min-height: 36px; padding: 0 9px; border: 1px solid var(--border); border-radius: 8px; outline: none; background: var(--surface-secondary); color: var(--text-primary); font-size: var(--fs-2xs); }
+.input:focus { border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 8%, transparent); }
+.toggle { min-width: 118px; min-height: 36px; padding: 0 9px; display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-secondary); color: var(--text-muted); }
+.toggle > span { width: 26px; height: 15px; position: relative; border-radius: 999px; background: color-mix(in srgb, var(--text-muted) 28%, var(--surface-card)); transition: background .18s ease; }
+.toggle > span::after { content: ""; width: 11px; height: 11px; position: absolute; top: 2px; left: 2px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.18); transition: transform .18s ease; }
+.toggle strong { font-size: var(--fs-2xs); }
+.toggleOn { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 28%, var(--border)); }
+.toggleOn > span { background: var(--accent); }
+.toggleOn > span::after { transform: translateX(11px); }
+.resetButton { min-height: 34px; padding: 0 8px; display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-card); color: var(--text-muted); font-size: var(--fs-2xs); font-weight: 650; }
+.resetButton:disabled { opacity: .38; cursor: not-allowed; }
+.panelFoot { padding: 13px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 20px; border-top: 1px solid color-mix(in srgb, var(--border) 72%, transparent); background: color-mix(in srgb, var(--surface-secondary) 22%, var(--surface-card)); }
+.envWarning { color: var(--warning) !important; }
+.envDanger { color: var(--danger) !important; }
+.environmentPanel { position: sticky; top: 12px; overflow: hidden; }
+.environmentList { padding: 4px 12px; }
+.environmentList > div { padding: 10px 1px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; border-bottom: 1px solid color-mix(in srgb, var(--border) 72%, transparent); }
+.environmentList > div:last-child { border-bottom: 0; }
+.environmentList span { color: var(--text-muted); font-size: var(--fs-2xs); }
+.environmentList strong { max-width: 145px; overflow-wrap: anywhere; color: var(--text-secondary); font-size: var(--fs-2xs); text-align: right; }
+.environmentFoot { margin: 0 12px 12px; padding: 10px; border-radius: 9px; background: var(--surface-secondary); color: var(--text-muted); font-size: var(--fs-2xs); line-height: 1.55; }
+.environmentFoot code { color: var(--text-secondary); }
+.loadingPanel { min-height: 180px; margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--text-muted); font-size: var(--fs-2xs); }
+.spinning { animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.accessDenied { min-height: 340px; display: grid; place-items: center; align-content: center; gap: 8px; color: var(--text-muted); text-align: center; }
+.accessDenied > span { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 13px; background: var(--accent-soft); color: var(--accent); }
+.accessDenied h1 { font-size: 18px; }
+.accessDenied p { max-width: 440px; color: var(--text-secondary); font-size: var(--fs-2xs); }
+.accessDenied a { min-height: 36px; margin-top: 5px; padding: 0 11px; display: inline-flex; align-items: center; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-card); color: var(--text-secondary); font-size: var(--fs-2xs); font-weight: 650; }
+@media (max-width: 1050px) { .contentGrid { grid-template-columns: 1fr; } .environmentPanel { position: static; } }
+@media (max-width: 760px) { .pageHead { align-items: stretch; flex-direction: column; } .headActions { width: 100%; } .headActions button { flex: 1; } .settingRow, .panelFoot { grid-template-columns: 1fr; gap: 10px; } .panelFoot > button { justify-self: start; } .settingActions { justify-content: flex-start; flex-wrap: wrap; } .inputWrap, .selectField { min-width: min(100%, 220px); } }
+@media (prefers-reduced-motion: reduce) { .spinning, .toggle > span, .toggle > span::after { animation: none; transition: none; } }
+
+.selectField { width: 100%; min-width: 160px; --app-control-height: 38px; }
+.pageHead h1 { font-size: var(--fs-xl); font-weight: 650; }
+.pageHead p, .securityNote p, .settingCopy p, .environmentFoot { font-size: var(--fs-sm); line-height: 1.5; }
+.kicker, .panelHead p, .environmentHead p, .settingCopy code, .environmentList span, .environmentList strong, .inputWrap > span, .sourceBadge { font-size: var(--fs-xs); }
+.settingCopy strong { font-size: var(--fs-base); font-weight: 600; }
+.input, .toggle, .resetButton, .primaryButton, .secondaryButton, .toggle strong, .accessDenied a { font-size: var(--fs-sm); }
+.panelHead, .environmentHead { background: transparent; }
+.primaryButton { background: var(--brand-gradient); color: var(--on-brand); border: 0; font-weight: 600; }
+.primaryButton:hover:not(:disabled) { background: var(--primary-hover); box-shadow: 0 6px 16px color-mix(in srgb, var(--primary) 26%, transparent); transform: translateY(-1px); }
+.secondaryButton:hover:not(:disabled), .resetButton:hover:not(:disabled), .accessDenied a:hover { color: var(--text-primary); background: var(--surface-secondary); border-color: color-mix(in srgb, var(--primary) 35%, var(--border)); transform: translateY(-1px); }

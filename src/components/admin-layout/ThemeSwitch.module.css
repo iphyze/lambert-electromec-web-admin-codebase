@@ -1,0 +1,5 @@
+.button { width: var(--header-control-height); height: var(--header-control-height); flex-shrink: 0; display: grid; place-items: center; border: 1px solid var(--border); border-radius: var(--header-control-radius); background: var(--surface-secondary); color: var(--text-secondary); transition: background-color 170ms ease, color 170ms ease; }
+.button:hover:not(:disabled) { background: var(--accent-soft); color: var(--primary); }
+.button:disabled { opacity: .65; cursor: default; }
+.button:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .button { transition: none; } }

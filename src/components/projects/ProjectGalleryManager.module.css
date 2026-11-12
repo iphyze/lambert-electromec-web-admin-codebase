@@ -1,0 +1,52 @@
+.card{ padding: 18px; border: 0; outline: 1px solid transparent; border-radius: 18px; background: var(--card-background); box-shadow: var(--card-shadow); }
+.head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.head h3 { font-size: 12px; }
+.head p { max-width: 620px; margin-top: 4px; color: var(--text-secondary); font-size: var(--fs-2xs); line-height: 1.55; }
+.count { flex-shrink: 0; padding: 5px 8px; border: 1px solid var(--border); border-radius: 999px; color: var(--text-muted); font-size: var(--fs-2xs); font-weight: 650; }
+.error, .success { margin-top: 12px; padding: 9px 11px; border-radius: 10px; font-size: var(--fs-2xs); }
+.error { border: 1px solid color-mix(in srgb, var(--danger) 30%, var(--border)); background: color-mix(in srgb, var(--danger) 8%, var(--surface-card)); color: var(--danger); }
+.success { display: flex; align-items: center; gap: 6px; border: 1px solid color-mix(in srgb, var(--success) 28%, var(--border)); background: color-mix(in srgb, var(--success) 8%, var(--surface-card)); color: var(--success); }
+.uploadBox { margin-top: 13px; padding: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px dashed color-mix(in srgb, var(--accent) 38%, var(--border)); border-radius: 12px; background: var(--surface-card); }
+.hidden { display: none; }
+.uploadLead { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.uploadLead > span { width: 34px; height: 34px; flex: 0 0 34px; display: grid; place-items: center; border-radius: 10px; background: var(--accent-soft); color: var(--accent); }
+.uploadLead strong, .uploadLead small { display: block; }
+.uploadLead strong { font-size: 10px; }
+.uploadLead small { margin-top: 2px; color: var(--text-muted); font-size: var(--fs-2xs); }
+.uploadBox > button, .pendingActions button { min-height: 36px; padding: 0 11px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-card); color: var(--text-primary); font-size: var(--fs-2xs); font-weight: 650; }
+.uploadBox > button { border-color: color-mix(in srgb, var(--accent) 25%, var(--border)); }
+.pending{ margin-top: 10px; padding: 11px; border: 0; outline: 1px solid transparent; border-radius: 18px; background: var(--card-background); box-shadow: var(--card-shadow); }
+.pending strong, .pending span { display: block; }
+.pending strong { font-size: var(--fs-2xs); }
+.pending > div:first-child > span { margin-top: 2px; overflow: hidden; color: var(--text-muted); font-size: var(--fs-2xs); text-overflow: ellipsis; white-space: nowrap; }
+.pendingActions { margin-top: 8px; display: flex; justify-content: flex-end; gap: 7px; }
+.pendingActions button:last-child { border: 0; background: var(--primary); color: var(--on-accent); }
+.progress { height: 5px; margin-top: 9px; overflow: hidden; border-radius: 99px; background: var(--surface-secondary); }
+.progress span { height: 100%; display: block; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+.empty{ min-height: 130px; margin-top: 13px; display: grid; place-items: center; align-content: center; gap: 5px;   color: var(--text-muted); text-align: center; border: 0; outline: 1px solid transparent; border-radius: 18px; background: var(--card-background); box-shadow: var(--card-shadow); }
+.empty strong { color: var(--text-secondary); font-size: 10px; }
+.empty span { font-size: var(--fs-2xs); }
+.grid { margin-top: 13px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 11px; }
+.item{ min-width: 0; overflow: hidden; border: 0; outline: 1px solid transparent; border-radius: 18px; background: var(--card-background); box-shadow: var(--card-shadow); }
+.visual { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface-secondary); }
+.visual img { width: 100%; height: 100%; object-fit: cover; }
+.featured { position: absolute; top: 8px; left: 8px; padding: 4px 7px; display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; background: color-mix(in srgb, var(--primary) 90%, transparent); color: #fff; font-size: var(--fs-2xs); font-weight: 650; }
+.meta { padding: 9px 9px 0; min-width: 0; }
+.meta strong, .meta span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.meta strong { font-size: var(--fs-2xs); }
+.meta span { margin-top: 2px; color: var(--text-muted); font-size: var(--fs-2xs); }
+.actions { padding: 8px 9px 9px; display: flex; align-items: center; gap: 5px; }
+.actions button { min-width: 28px; height: 28px; padding: 0 7px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-card); color: var(--text-secondary); font-size: var(--fs-2xs); }
+.actions button:nth-child(4) { margin-left: auto; }
+.actions .remove { color: var(--danger); }
+.editFields { padding: 8px 9px 10px; display: grid; gap: 6px; }
+.editFields input { min-width: 0; min-height: 34px; padding: 0 9px; border: 1px solid var(--border); border-radius: 8px; outline: 0; background: var(--input-background); color: var(--text-primary); font-size: var(--fs-2xs); }
+.editFields > div { display: flex; justify-content: flex-end; gap: 6px; }
+.editFields button { min-height: 30px; padding: 0 9px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-card); color: var(--text-primary); font-size: var(--fs-2xs); font-weight: 650; }
+.editFields button:last-child { border: 0; background: var(--primary); color: var(--on-accent); }
+.featuredNote { margin-top: 10px; color: var(--text-muted); font-size: var(--fs-2xs); }
+.spin { animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .head, .uploadBox { align-items: stretch; flex-direction: column; } .uploadBox > button { width: 100%; } .grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .spin { animation: none; } }

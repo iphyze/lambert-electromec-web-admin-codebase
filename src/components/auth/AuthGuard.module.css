@@ -1,0 +1,52 @@
+.screen {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background:
+    radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 30%),
+    var(--background);
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--text-secondary);
+}
+
+.loader > div strong,
+.loader > div span {
+  display: block;
+}
+
+.loader strong {
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.loader span {
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.iconWrap {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: var(--on-accent);
+  box-shadow: 0 10px 25px rgba(39, 116, 170, 0.18);
+  animation: breathe 1.35s ease-in-out infinite alternate;
+}
+
+@keyframes breathe {
+  from { transform: scale(0.95); opacity: 0.78; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iconWrap { animation: none; }
+}

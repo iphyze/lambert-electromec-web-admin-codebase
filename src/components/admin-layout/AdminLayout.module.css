@@ -1,0 +1,50 @@
+.shell {
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 84px;
+  --admin-header-height: 76px;
+  --layout-inset: 14px;
+  --current-sidebar-width: var(--sidebar-width);
+  min-height: 100svh;
+  position: relative;
+  background: var(--background);
+}
+.shell[data-collapsed="true"] { --current-sidebar-width: var(--sidebar-collapsed-width); }
+.workspace {
+  min-width: 0;
+  margin-left: calc(var(--current-sidebar-width) + (var(--layout-inset) * 2));
+  padding: var(--layout-inset) var(--layout-inset) 0 0;
+  transition: margin-left 210ms ease;
+}
+.content {
+  min-width: 0;
+  min-height: calc(100svh - var(--admin-header-height) - var(--layout-inset));
+  padding: 20px 0 40px;
+}
+/* Main receives programmatic route focus; interactive descendants keep focus rings. */
+.content:focus { outline: none; }
+.skipLink {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 2000;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-primary);
+  transform: translateY(-150%);
+}
+.skipLink:focus { transform: translateY(0); outline: 3px solid var(--focus-ring); }
+.preparing { min-height: 100svh; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-secondary); font-size: var(--fs-sm); }
+.preparingDot { width: 11px; height: 11px; border: 3px solid var(--accent-soft); border-top-color: var(--primary); border-radius: 50%; animation: spin 800ms linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (min-width: 768px) and (max-width: 1099px) {
+  .workspace { margin-left: calc(var(--sidebar-collapsed-width) + (var(--layout-inset) * 2)); }
+}
+@media (max-width: 767px) {
+  .shell { --layout-inset: 0px; }
+  .workspace { margin-left: 0; padding: 0 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workspace { transition: none; }
+  .preparingDot { animation: none; }
+}

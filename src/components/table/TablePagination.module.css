@@ -1,0 +1,25 @@
+.pagination { display: flex; justify-content: space-between; align-items: center; gap: 18px; min-height: 60px; margin-top: 14px; padding: 10px 14px; border: 0; border-radius: 16px; outline: 1px solid transparent; background: linear-gradient(110deg, #fff, color-mix(in srgb, var(--accent-soft) 35%, #fff)); box-shadow: var(--card-shadow); color: var(--text-muted); font-size: var(--fs-sm); font-weight: 400; font-variant-numeric: tabular-nums; }
+:global(.dark) .pagination { background: linear-gradient(110deg, #1a1f23, color-mix(in srgb, var(--primary) 6%, #15191c)); }
+.summary { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.summary strong { font-weight: 600; color: var(--text-primary); }
+.spinnerSlot { width: 14px; height: 14px; display: inline-flex; justify-content: center; align-items: center; flex: 0 0 14px; }
+.spinner { color: var(--primary); animation: spin .85s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.right, .pageSize, .controls, .pageNumbers { display: flex; align-items: center; }
+.right { gap: 20px; }
+.pageSize { gap: 9px; white-space: nowrap; font-weight: 500; }
+.pageSizeSelect { width: 75px; --app-control-height: 34px; --app-control-radius: 10px; }
+.controls { gap: 8px; }
+.pageNumbers { gap: 3px; }
+.navButton, .pageButton { display: inline-flex; align-items: center; justify-content: center; gap: 5px; height: 34px; min-width: 34px; padding: 0; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--text-secondary); font-size: var(--fs-sm); font-weight: 600; font-variant-numeric: tabular-nums; transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease; }
+.navButton { min-width: 77px; padding-inline: 11px; border-color: var(--border); background: var(--surface-card); }
+.navButton:hover:not(:disabled), .pageButton:hover:not(:disabled) { background: var(--accent-soft); color: var(--primary); }
+.activePage, .activePage:disabled { background: var(--brand-gradient); color: #fff; box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 24%, transparent); opacity: 1; cursor: default; }
+.navButton:disabled, .pageButton:disabled:not(.activePage) { opacity: .5; cursor: not-allowed; }
+.ellipsis { min-width: 20px; text-align: center; color: var(--text-muted); user-select: none; }
+.compactPage { display: none; text-align: center; white-space: nowrap; font-weight: 500; }
+.compactPage strong { color: var(--text-primary); font-weight: 600; }
+.navButton:focus-visible, .pageButton:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+@media (max-width: 819px) { .pagination { display: grid; grid-template-columns: minmax(0,1fr) auto; grid-template-areas: "summary size" "controls controls"; gap: 12px 8px; } .right { display: contents; } .summary { grid-area: summary; } .pageSize { grid-area: size; justify-content: flex-end; } .controls { grid-area: controls; justify-content: space-between; width: 100%; } .pageNumbers { display: none; } .compactPage { display: block; } .navButton { min-width: 42px; padding-inline: 10px; } .navText { display: none; } }
+@media (max-width: 440px) { .pagination { padding: 10px; } .summary, .pageSize { font-size: var(--fs-xs); } .pageSize { gap: 5px; } .pageSizeSelect { width: 66px; } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none; } .navButton, .pageButton { transition: none; } }

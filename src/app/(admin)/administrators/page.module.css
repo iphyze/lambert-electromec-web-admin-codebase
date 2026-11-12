@@ -1,0 +1,15 @@
+.page { width: 100%; min-width: 0; }
+.pageHead { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.kicker { display: block; margin-bottom: 6px; color: var(--primary); font-size: var(--fs-2xs); font-weight: 600; letter-spacing: .09em; text-transform: uppercase; }
+.pageHead h1 { font-size: clamp(25px, 3vw, 36px); font-weight: 650; line-height: 1.1; letter-spacing: -.04em; }
+.pageHead p { max-width: 720px; margin-top: 8px; color: var(--text-secondary); font-size: var(--fs-sm); font-weight: 400; line-height: 1.65; }
+.errorBanner { margin-top: 14px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid color-mix(in srgb, var(--danger) 30%, var(--border)); border-radius: 11px; background: color-mix(in srgb, var(--danger) 8%, var(--surface-card)); color: var(--danger); font-size: var(--fs-sm); }
+.errorBanner button { min-height: 34px; padding: 6px 10px; border: 0; border-radius: 8px; background: var(--danger); color: var(--on-danger); font-size: var(--fs-sm); font-weight: 600; }
+.errorBanner button:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+@media (max-width: 650px) { .pageHead { align-items: stretch; flex-direction: column; } }
+
+.restricted { min-height: 220px; padding: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; border: 0; border-radius: 18px; outline: 1px solid transparent; background: var(--card-background); box-shadow: var(--card-shadow); }
+.restricted > span { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); color: var(--primary); }
+.restricted h1 { color: var(--text-primary); font-size: var(--fs-lg); font-weight: 600; }
+.restricted p { color: var(--text-muted); font-size: var(--fs-sm); line-height: 1.5; }
+.noticeBanner { margin-top: 14px; padding: 12px; border-radius: 11px; background: var(--accent-soft); color: var(--primary); font-size: var(--fs-sm); }
