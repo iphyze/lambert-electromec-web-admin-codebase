@@ -1,0 +1,14 @@
+---
+deployment:
+  tasks:
+    # Lambert Admin - cPanel deployment.
+    # cPanel runs these steps when you click "Deploy HEAD Commit".
+    # The repository lives OUTSIDE the website folder; this copies the build in.
+    #
+    # Safe for the live site:
+    #   - never touches .git, .well-known (SSL renewal), cgi-bin or PHP settings;
+    #   - with rsync: removes files that are no longer in the build, but keeps
+    #     old _next/static files so already-open browser tabs keep working;
+    #   - without rsync: copies everything and deletes nothing.
+    - export DEPLOYPATH="$HOME/test.lambertelectromec.com.ng/"
+    - if [ -x /usr/bin/rsync ]; then /usr/bin/rsync -a --delete --filter='P _next/static/**' --exclude='.git/' --exclude='.cpanel.yml' --exclude='.nojekyll' --exclude='.well-known/' --exclude='cgi-bin/' --exclude='.user.ini' --exclude='php.ini' --exclude='error_log' ./ "$DEPLOYPATH"; else /bin/cp -R ./. "$DEPLOYPATH" && /bin/rm -f "$DEPLOYPATH.cpanel.yml" "$DEPLOYPATH.nojekyll"; fi

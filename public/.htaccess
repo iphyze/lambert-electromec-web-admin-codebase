@@ -2,19 +2,29 @@ Options -MultiViews
 DirectoryIndex index.html
 
 AddType application/manifest+json .webmanifest
+
+# The service worker and manifest must always be re-checked so updates reach users.
 <IfModule mod_headers.c>
   <FilesMatch "^(sw\.js|manifest\.webmanifest)$">
     Header set Cache-Control "no-cache, no-store, must-revalidate"
   </FilesMatch>
 </IfModule>
 
+# Never serve repository or deployment files.
+# (Does not affect /.well-known, which cPanel needs for SSL renewal.)
+<IfModule mod_alias.c>
+  RedirectMatch 404 /\.(git|cpanel\.yml|nojekyll)
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # Serve real files and folders as they are.
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
+  # /projects -> /projects/ (pages are exported as folder/index.html).
   RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
   RewriteRule ^(.+?)/?$ $1/ [R=301,L]
 </IfModule>
